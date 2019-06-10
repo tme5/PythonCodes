@@ -1,0 +1,12 @@
+Worst Performance
+
+rayfire_entitylist,2,15.69,1
+find_entitylist_ray_hits,3,14.949,1
+ent_ray_dist_queue::process,4,14.209,1
+face_ray_dist::calculate,5,13.468,13
+ray_hits_entity,6,12.727,13
+ray_hits_edge,7,10.176,19
+
+Rest Call Depth 7 API info
+
+find_face_edge_distance,7,1.81,13
