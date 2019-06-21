@@ -5,6 +5,7 @@ Created on Jun 4, 2019
 @author: TME5
 '''
 # +---{ Import Section }---+
+from Tools.scripts.fixcid import Identifier
 
 # +---{Supportive Class Section }---+
 
@@ -22,6 +23,9 @@ class Node:
     def add_child(self, identifier):
         self.__children.append(identifier)
     
+    def get_identifier(self):
+        return self.__identifier 
+     
 (_ROOT, _DEPTH, _BREADTH) = range(3)
 
 class Tree:
@@ -40,7 +44,7 @@ class Tree:
             #print(parent)
             self[parent].add_child(identifier)
         return node
-    
+     
     def traverse(self, identifier, mode=_DEPTH):
         # Python generator. Loosly based on an algorithm from 
         # 'Essential LISP' by John R. Anderson, Albert T. Corbett, 
@@ -54,7 +58,7 @@ class Tree:
                 queue = expansion + queue[1:]  # depth-first
             elif mode == _BREADTH:
                 queue = queue[1:] + expansion  # width-first
-                
+          
     def __getitem__(self, key):
         return self.__nodes[key]
 
