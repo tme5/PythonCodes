@@ -20,10 +20,11 @@ porygonz registeel relicanth remoraid rufflet sableye scolipede scrafty seaking
 sealeo silcoon simisear snivy snorlax spoink starly tirtouga trapinch treecko
 tyrogue vigoroth vulpix wailord wartortle whismur wingull yamask
 '''
+from tree import Tree
+import random
 
 pokemons=['audino', 'bagon', 'baltoy', 'banette', 'bidoof', 'braviary', 'bronzor', 'carracosta', 'charmeleon', 'cresselia', 'croagunk', 'darmanitan', 'deino', 'emboar', 'emolga', 'exeggcute', 'gabite', 'girafarig', 'gulpin', 'haxorus', 'heatmor', 'heatran', 'ivysaur', 'jellicent', 'jumpluff', 'kangaskhan', 'kricketune', 'landorus', 'ledyba', 'loudred', 'lumineon', 'lunatone', 'machamp', 'magnezone', 'mamoswine', 'nosepass', 'petilil', 'pidgeotto', 'pikachu', 'pinsir', 'poliwrath', 'poochyena', 'porygon2', 'porygonz', 'registeel', 'relicanth', 'remoraid', 'rufflet', 'sableye', 'scolipede', 'scrafty', 'seaking', 'sealeo', 'silcoon', 'simisear', 'snivy', 'snorlax', 'spoink', 'starly', 'tirtouga', 'trapinch', 'treecko', 'tyrogue', 'vigoroth', 'vulpix', 'wailord', 'wartortle', 'whismur', 'wingull', 'yamask'
 ]
-import random
 
 def play_pokemon_old():
     pokemons_copy=pokemons.copy()
@@ -41,38 +42,32 @@ def play_pokemon_old():
             pokemon=pokemons_copy.pop(pokemons_copy.index(next_list[0]))
             print(f'Player {i}: {pokemon}')
         else:
-            break    
-
+            break
+            
 def play_pokemon(org_pokemon):
-    #pokemons_copy=pokemons.copy()
-    next_list=[x for x in pokemons if x.startswith(org_pokemon[-1])]
-    longest_list=[]
-    current_list=[]
-    if next_list==[]:
-        return [org_pokemon]
-    for p1 in next_list:
-        pokemons_copy=pokemons.copy()
-        pokemons_copy.pop(pokemons_copy.index(p1))
-        pokemon=p1
-        while True:        
-            next_list=[x for x in pokemons_copy if x.startswith(pokemon[-1])]
-            if len(next_list)>0:
-                pokemon=pokemons_copy.pop(pokemons_copy.index(next_list[0]))
-                current_list.append(pokemon)
-            else:
-                break
-        if len(current_list)>len(longest_list):
-            longest_list=current_list
-    return [org_pokemon].extend(longest_list)
+    data_tree=Tree()
+    pokemons_copy=pokemons.copy()
+    data_tree.add_node(org_pokemon)
+    parent_list=[org_pokemon]
+    while True:
+        for current_parent in parent_list:
+            pokemons_copy.pop(pokemons_copy.index(current_parent))
+            child_list=[x for x in pokemons_copy if x.startswith(current_parent[-1])]
+            for child in child_list:
+                data_tree.add_node(child,current_parent)
+        parent_list=child_list
+        if parent_list==[]:
+            break  
     
 if __name__=='__main__':
-    longest=[]
-    current=[]
-    for pokemon in pokemons:
-        current=play_pokemon(pokemon)
-        if len(current)>len(longest):
-            longest=current
-    
-    print(len(longest))     
-    print(longest)
-        
+    print(play_pokemon('bagon'))
+#     longest=[]
+#     current=[]
+#     for pokemon in pokemons:
+#         current=play_pokemon(pokemon)
+#         if len(current)>len(longest):
+#             longest=current
+#     
+#     print(len(longest))     
+#     print(longest)
+#         
