@@ -66,8 +66,10 @@ def main():
     main function
     """
     new_arr1=prodArray1([1, 2, 3, 4, 5])
-    print(new_arr1)    
+    print(new_arr1)
+    #[120, 60, 40, 30, 24]
     new_arr2=prodArray1([3, 2, 1])
     print(new_arr2)
+    #[2, 3, 6]
         
 if __name__ == '__main__': main()
