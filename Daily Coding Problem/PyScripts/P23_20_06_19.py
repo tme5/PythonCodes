@@ -13,3 +13,42 @@ Created on 25-Jun-2019
 
 @author: Lenovo
 '''
+def min_steps(matrix,start,end):
+    if matrix[start[0]][start[1]]=='t' or matrix[end[0]][end[1]]=='t':
+        return False
+    curr_pos=start
+    step=0
+    if curr_pos[0]>0:
+        i=-1
+    else:
+        i=1
+    if curr_pos[1]>0:
+        j=-1
+    else:
+        j=1
+    prev_pos=start
+    while curr_pos!=end:            
+        next_pos=(curr_pos[0]+i,curr_pos[1])
+        if matrix[next_pos[0]][next_pos[1]]=='f':
+            curr_pos=next_pos
+            step+=1
+        else:
+            curr_pos=(curr_pos[0],curr_pos[1]+j)
+            step+=1
+        if curr_pos[0]>=prev_pos[0]:
+            i=1
+        else:
+            i=-1
+        if curr_pos[1]>=prev_pos[1]:
+            j=1
+        else:
+            j=-1   
+        prev_pos=curr_pos
+            
+matrix=[['f', 'f', 'f', 'f'],
+['t', 't', 'f', 't'],
+['f', 'f', 'f', 'f'],
+['f', 'f', 'f', 'f']]
+start=(3,0)
+end=(0,0)
+print(min_steps(matrix,start,end))
