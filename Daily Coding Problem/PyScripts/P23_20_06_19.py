@@ -13,42 +13,37 @@ Created on 25-Jun-2019
 
 @author: Lenovo
 '''
-def min_steps(matrix,start,end):
+def mark_adjacent(matrix, pos,num):
+    crow=len(matrix)
+    ccol=len(matrix[0])
+    ret_list=[]
+    adjs=[(pos[0]+1,pos[1]),(pos[0]-1,pos[1]),(pos[0],pos[1]+1),(pos[0],pos[1]-1)]
+    for adj in adjs:
+        if adj[0]<crow and adj[0]>=0 and adj[1]<ccol and adj[1]>=0 and matrix[adj[0]][adj[1]]!='t' and type(matrix[adj[0]][adj[1]])!=int:
+            matrix[adj[0]][adj[1]]=num
+            ret_list.append(adj)
+    return ret_list          
+                
+def main():
+    matrix=[['f', 'f', 'f', 'f'],
+    ['t', 't', 'f', 't'],
+    ['f', 'f', 'f', 'f'],
+    ['f', 'f', 'f', 'f']]
+    start=(3,0)
+    end=(0,0)
     if matrix[start[0]][start[1]]=='t' or matrix[end[0]][end[1]]=='t':
-        return False
-    curr_pos=start
-    step=0
-    if curr_pos[0]>0:
-        i=-1
+        print('No Solution')
     else:
-        i=1
-    if curr_pos[1]>0:
-        j=-1
-    else:
-        j=1
-    prev_pos=start
-    while curr_pos!=end:            
-        next_pos=(curr_pos[0]+i,curr_pos[1])
-        if matrix[next_pos[0]][next_pos[1]]=='f':
-            curr_pos=next_pos
-            step+=1
-        else:
-            curr_pos=(curr_pos[0],curr_pos[1]+j)
-            step+=1
-        if curr_pos[0]>=prev_pos[0]:
-            i=1
-        else:
-            i=-1
-        if curr_pos[1]>=prev_pos[1]:
-            j=1
-        else:
-            j=-1   
-        prev_pos=curr_pos
-            
-matrix=[['f', 'f', 'f', 'f'],
-['t', 't', 'f', 't'],
-['f', 'f', 'f', 'f'],
-['f', 'f', 'f', 'f']]
-start=(3,0)
-end=(0,0)
-print(min_steps(matrix,start,end))
+        num=0
+        matrix[start[0]][start[1]]=num
+        adj=[start]
+        while end not in adj:
+            num+=1
+            ret_val=[]
+            for pos in adj:
+                ret_val.extend(mark_adjacent(matrix, pos, num))
+            adj=ret_val
+        print(matrix[end[0]][end[1]])
+
+if __name__=='__main__':
+    main()

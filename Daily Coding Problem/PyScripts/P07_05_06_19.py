@@ -10,24 +10,28 @@ Created on Jun 5, 2019
 
 @author: Administrator
 '''
-# +---{ Import Section }---+
-import sys,os,time
-# +---{Supportive Class Section }---+
-def elapsed_time(f):
-    def wrapper():
-        t1 = time.time()
-        f()
-        t2 = time.time()
-        print(f'Elapsed time: {(t2 - t1)} s')
-    return wrapper      
-           
-# +---{ Main Section }---+
-@elapsed_time
-def main():
-    """
-    main function
-    """
-    pass
-        
+import string
+alpha_list=list(string.ascii_lowercase)
+
+def decode(data,k,decode_cache):
+    # If we have the cache value, then return it
+    if data in decode_cache:
+        return decode_cache[data]    
+    #Compute the rest
+    if k==0:
+        return 1
+    s=len(data)-k
+    if data[s]=='0':
+        return 0
+    result=decode(data,k-1,decode_cache)
+    if k>=2 and int(data[s:s+2])<=26:
+        result+=decode(data,k-2,decode_cache)
+    decode_cache[k]=result
+    return result
             
+def main():
+    en_msg='111111'
+    decode_cache={}
+    print(decode(en_msg,len(en_msg),decode_cache))
+          
 if __name__ == '__main__': main()

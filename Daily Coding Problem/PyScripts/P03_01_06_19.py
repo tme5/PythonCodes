@@ -26,6 +26,38 @@ class Node:
         self.value=val
         self.left=left
         self.right=right
-        
+
+def serialize(node):
+    ret=[]
+    def node_to_string(node):
+        if node:
+            ret.append(str(node.value))
+            node_to_string(node.left)
+            node_to_string(node.right)
+        else:
+            ret.append('?')
+    node_to_string(node) 
+    return ','.join(ret)
+
+def deserialize(inp):
+    lst=iter(inp.split(','))
+    def string_to_node():
+        try:
+            inp=next(lst)
+            if inp=='?':
+                return None
+            else:
+                node=Node(inp)
+                node.left=string_to_node()
+                node.right=string_to_node()
+                return node
+        except StopIteration:
+            pass
+    return string_to_node()
+    
 node = Node('root', Node('left', Node('left.left')), Node('right'))
+# s1=serialize(node)
+# node2=deserialize(s1)
+# print(node2.left.left.value)
+assert deserialize(serialize(node)).left.left.value == 'left.left'
 
