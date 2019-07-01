@@ -11,3 +11,75 @@ Created on 25-Jun-2019
 
 @author: Lenovo
 '''
+class Node:
+    def __init__(self,data,identifier=None):
+        self.identifier=identifier
+        self.val=data
+        self.right=None
+        self.left=None
+        self.locked=False
+        self.locked_descendants=0
+    
+    def _can_lock_or_unlock(self):
+        if self.locked_descendants>0:
+            return False
+        cur=self.identifier
+        while cur:
+            if cur.locked:
+                return False
+            cur=cur.identifier
+        return True
+        
+    def is_locked(self):
+        return self.locked
+    
+    def lock(self):
+        if self._can_lock_or_unlock():
+            self.locked=True
+            cur=self.identifier
+            while cur:
+                cur.locked_descendants+=1
+                cur=cur.identifier
+            return True
+        else:
+            return False
+        
+    def unlock(self):
+        if self._can_lock_or_unlock():
+            self.locked=False
+            cur=self.identifier
+            while cur:
+                cur.locked_descendants-=1
+                cur=cur.identifier
+            return True
+        else:
+            return False
+
+def main():
+    root=Node(1)
+    root.left=Node(2,root)
+    root.left.left=Node(4,root.left)
+    root.left.left.left=Node(8,root.left.left)
+    root.left.left.right=Node(9,root.left.left)
+    root.left.right=Node(5,root.left)
+    root.left.right.left=Node(10,root.left.right)
+    root.left.right.right=Node(11,root.left.right)
+    root.right=Node(3,root)
+    root.right.left=Node(6,root.right)
+    root.right.left.right=Node(13,root.right.left)
+    root.right.right=Node(7,root.right)
+    root.right.right.left=Node(14,root.right.right)
+    
+    assert root.lock()==True, 'Can\'t Lock Node'
+    assert root.unlock()==True, 'Can\'t unlock Node'
+    assert root.is_locked()==False,'Unexpected status'
+    assert root.right.right.left.is_locked()==False, 'Unexpected status'
+    assert root.right.right.left.lock()==True, 'Can\'t Lock Node'
+    assert root.right.lock()==False, 'Shouldn\'t Lock Node'
+    assert root.right.right.left.unlock()==True, 'Can\'t unlock Node'
+    assert root.right.lock()==True, 'Can\'t Lock Node'
+    
+    
+
+if __name__=='__main__':
+    main()

@@ -13,3 +13,22 @@ Created on 28-Jun-2019
 
 @author: Lenovo
 '''
+def justify(word_list,k):
+    ret_lst=[]
+    while len(word_list)>0:
+        lst=[]
+        for word in word_list:
+            if sum(map(len,lst))+len(lst)+len(word)>k:
+                break
+            lst.append(word)
+    sentence=''       
+    return ret_lst
+    
+def main():
+    word_list=["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+    justify(word_list,16)
+    #["the  quick brown","fox  jumps  over","the   lazy   dog"]
+
+if __name__=='__main__':
+    main()
+    

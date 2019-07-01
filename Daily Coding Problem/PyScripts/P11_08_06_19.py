@@ -9,3 +9,12 @@ Created on 25-Jun-2019
 
 @author: Lenovo
 '''
+def autocomplete(inp,lst):
+    return [word for word in lst if word.startswith(inp)]
+
+def main():
+    print(autocomplete('de', ['dog','deer','deal']))
+    
+if __name__=='__main__':
+    main()
+    
