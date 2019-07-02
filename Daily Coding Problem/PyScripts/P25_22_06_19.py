@@ -11,3 +11,34 @@ Created on 25-Jun-2019
 
 @author: Lenovo
 '''
+def regex(inp,ex):
+    str=list(inp)
+    rexp=list(ex)
+    while len(rexp)>0:
+        char=rexp[0]
+        if char!='*':
+            if char=='.':
+                str.pop(0)
+                rexp.pop(0)
+            if char.isalpha():
+                if str.pop(0)!=rexp.pop(0):
+                    return False
+        else:
+            rexp.pop(0)
+            while True:
+                if rexp in str:
+                    break
+                else:
+                    str.pop(0)
+    if len(str)>0:
+        return False
+    return True
+
+def main():
+    assert regex('ray','ra.')==True, 'Passing case'
+    assert regex('raymond','ra.')==False, 'Failing case'
+    assert regex('chat','.*at')==True, 'Passing case'
+    assert regex('chats','*at')==False, 'Passing case'
+    
+if __name__=='__main__':
+    main()

@@ -13,21 +13,42 @@ Created on 28-Jun-2019
 
 @author: Lenovo
 '''
+def make_sentence(sent,k):
+    def add_space(num):
+        sent[num]=sent[num]+' '
+        return sent
+    total_len=sum([len(word) for word in sent])
+    i=0
+    while total_len<k:
+        if i<len(sent)-1:
+            sent=add_space(i)
+            i+=1
+        else:
+            i=0
+        total_len=sum([len(word) for word in sent])
+    return sent
+    
 def justify(word_list,k):
-    ret_lst=[]
-    while len(word_list)>0:
-        lst=[]
-        for word in word_list:
+    sent_in=[]
+    lst=[]
+    while True:
+        if len(word_list)==0:
+            sent_in.append(lst)
+            lst=[]
+            break
+        else:
+            word=word_list[0]
             if sum(map(len,lst))+len(lst)+len(word)>k:
-                break
-            lst.append(word)
-    sentence=''       
-    return ret_lst
+                sent_in.append(lst)
+                lst=[]
+            else:
+                lst.append(word_list.pop(0))
+    sentences=[''.join(make_sentence(sent,k)) for sent in sent_in]      
+    return sentences
     
 def main():
     word_list=["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
-    justify(word_list,16)
-    #["the  quick brown","fox  jumps  over","the   lazy   dog"]
+    assert justify(word_list,16)==["the  quick brown","fox  jumps  over","the   lazy   dog"], 'Wrong sentence justification'
 
 if __name__=='__main__':
     main()

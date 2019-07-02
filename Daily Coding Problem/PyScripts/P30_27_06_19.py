@@ -9,3 +9,26 @@ Created on 28-Jun-2019
 
 @author: Lenovo
 '''
+def get_trap_info(arr):
+    trapped=0
+    top=min(arr[0],arr[-1])
+    i=1
+    while i<len(arr)-1:
+        prev=arr[i-1]
+        next=arr[i+1]
+        top_i=min(prev,next)
+        if top_i>top and top_i>arr[i]:
+            trapped+=top_i-arr[i]
+        elif top>arr[i]:
+            trapped+=top-arr[i]
+        i+=1
+    return trapped    
+        
+def main():
+    assert get_trap_info([2,1,2])==1, 'Wrong trapped info'
+    assert get_trap_info([3,0,1,3,0,5])==8, 'Wrong trapped info'
+    assert get_trap_info([1,2,3,4,5])==0, 'Wrong trapped info'
+    assert get_trap_info([1,2,3,1,4,1])==2, 'Wrong trapped info'
+
+if __name__=='__main__':
+    main()

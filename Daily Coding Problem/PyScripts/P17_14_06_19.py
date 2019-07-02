@@ -7,9 +7,7 @@ dir
     subdir2
         file.ext
 The directory dir contains an empty sub-directory subdir1 and a sub-directory subdir2 containing a file file.ext.
-
 The string "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext" represents:
-
 dir
     subdir1
         file1.ext
@@ -28,3 +26,66 @@ Created on 25-Jun-2019
 
 @author: Lenovo
 '''
+class Node:
+    def __init__(self, identifier):
+        self.__identifier = identifier
+        self.__children=[]
+
+    def identifier(self):
+        return self.__identifier
+        
+    def children(self):
+        return self.__children
+
+    def add_child(self, identifier):
+        self.__children.append(identifier)
+    
+    def get_identifier(self):
+        return self.__identifier 
+
+class Tree:
+    def __init__(self):
+        self.__nodes = {}
+        
+    def nodes(self):
+        return self.__nodes
+    
+    def add_node(self, identifier, parent=None):
+        node = Node(identifier)
+        self[identifier] = node
+        if parent is not None:
+            self[parent].add_child(identifier)
+        return node
+          
+    def __getitem__(self, key):
+        return self.__nodes[key]
+
+    def __setitem__(self, key, item):
+        self.__nodes[key] = item
+
+def get_path(dir_tree):
+    pass
+      
+def longest_filepath(inp):
+    lst=inp.split('\n')
+    _parent_list=[]
+    max_len=0
+    for str in lst:
+        tabs=str.count('\t')
+        if tabs==0:
+            _parent_list.append(str)
+        elif tabs>0:
+            sub=str.replace('\t', '')
+            if len(_parent_list)<=tabs:
+                _parent_list.append(sub)
+            else:
+                _parent_list[tabs]=sub
+        if '.' in _parent_list[-1]:
+            max_len=max(max_len,len('/'.join(_parent_list)))
+    return max_len
+
+def main():
+    assert longest_filepath('dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext')==32, 'Not the longest path'
+
+if __name__=='__main__':
+    main()
