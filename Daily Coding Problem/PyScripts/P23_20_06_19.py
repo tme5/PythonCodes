@@ -43,7 +43,7 @@ def main():
             for pos in adj:
                 ret_val.extend(mark_adjacent(matrix, pos, num))
             adj=ret_val
-        print(matrix[end[0]][end[1]])
+        assert matrix[end[0]][end[1]]==7, 'Wrong output'
 
 if __name__=='__main__':
     main()

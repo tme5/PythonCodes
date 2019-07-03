@@ -40,8 +40,7 @@ my_log.record(1013)
 my_log.record(1014)
 my_log.record(1015)
 
-print(my_log.get_last(3))
-print(my_log.get_last(5))
-#print(my_log.get_last(0))
-#print(my_log.get_last(6))
+assert my_log.get_last(3)==[1013,1014,1015], 'Wrong output'
+assert my_log.get_last(5)==[1011,1012,1013,1014,1015],'Wrong output'
+
         

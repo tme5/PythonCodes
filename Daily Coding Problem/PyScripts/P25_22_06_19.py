@@ -26,7 +26,7 @@ def regex(inp,ex):
         else:
             rexp.pop(0)
             while True:
-                if rexp in str:
+                if ''.join(str).startswith(''.join(rexp)):
                     break
                 else:
                     str.pop(0)
@@ -37,7 +37,7 @@ def regex(inp,ex):
 def main():
     assert regex('ray','ra.')==True, 'Passing case'
     assert regex('raymond','ra.')==False, 'Failing case'
-    assert regex('chat','.*at')==True, 'Passing case'
+    assert regex('cheaat','.*at')==True, 'Passing case'
     assert regex('chats','*at')==False, 'Passing case'
     
 if __name__=='__main__':

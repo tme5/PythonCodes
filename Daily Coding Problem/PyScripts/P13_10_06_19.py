@@ -7,3 +7,25 @@ Created on 25-Jun-2019
 
 @author: Lenovo
 '''
+def longest_substring(mainstr,k):
+    longest=''
+    substr=''
+    i=0
+    j=0
+    while i<len(mainstr):
+        substr+=mainstr[i]
+        if len(set(substr))>k:
+            j+=1
+            i=j
+            substr=''
+        else:
+            longest=longest if len(longest)>len(substr) else substr
+            i+=1
+    return longest
+
+def main():
+    assert longest_substring('abcba',2)=='bcb', 'Wrong output'
+    assert longest_substring("aabacbebebe", 3)=='cbebebe', 'Wrong output'
+    
+if __name__=='__main__':
+    main()

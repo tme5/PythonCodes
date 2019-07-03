@@ -29,7 +29,7 @@ def cdr(cons):
     return cons(lambda a,b: b)
 
 p1=cons('apple','banana')
-print(car(p1))
-print(cdr(p1))
+assert car(p1)=='apple', 'Wrong output'
+assert cdr(p1)=='banana', 'Wrong output'
 
 

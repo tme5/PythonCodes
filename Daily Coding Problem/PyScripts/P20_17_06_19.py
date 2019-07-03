@@ -76,5 +76,5 @@ if __name__ == '__main__':
     sll2.insert_at_end(10)
     
     intx_node=get_intersection(sll1, sll2)
-    print(intx_node.data)
+    assert intx_node.data==8, 'Wrong output'
     #8

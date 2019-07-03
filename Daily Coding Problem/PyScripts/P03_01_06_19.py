@@ -56,8 +56,5 @@ def deserialize(inp):
     return string_to_node()
     
 node = Node('root', Node('left', Node('left.left')), Node('right'))
-# s1=serialize(node)
-# node2=deserialize(s1)
-# print(node2.left.left.value)
 assert deserialize(serialize(node)).left.left.value == 'left.left'
 

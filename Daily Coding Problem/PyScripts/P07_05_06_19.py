@@ -32,6 +32,6 @@ def decode(data,k,decode_cache):
 def main():
     en_msg='111111'
     decode_cache={}
-    print(decode(en_msg,len(en_msg),decode_cache))
+    assert decode(en_msg,len(en_msg),decode_cache)==13, 'Wrong output'
           
 if __name__ == '__main__': main()

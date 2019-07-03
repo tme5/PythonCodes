@@ -25,11 +25,11 @@ def max_non_adj_sum(arr):
     return (excl if excl>incl else incl)        
 
 def main():
-    print(max_non_adj_sum([2,4,6,2,5]))
-    print(max_non_adj_sum([5,1,1,5]))
-    print(max_non_adj_sum([5,5,10,100,10,5]))
-    print(max_non_adj_sum([1,2,3]))
-    print(max_non_adj_sum([1,20,3]))
+    assert max_non_adj_sum([2,4,6,2,5])==13, 'Wrong output'
+    assert max_non_adj_sum([5,1,1,5])==10, 'Wrong output'
+    assert max_non_adj_sum([5,5,10,100,10,5])==110, 'Wrong output'
+    assert max_non_adj_sum([1,2,3])==4, 'Wrong output'
+    assert max_non_adj_sum([1,20,3])==20, 'Wrong output'
     
 if __name__=='__main__':
     main()

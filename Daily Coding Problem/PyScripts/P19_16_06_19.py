@@ -27,7 +27,7 @@ def main():
     input=[[17,2,17],[16,16,5],[14,3,19]]
     Output=color(input)
     print(f'Minimum cost is {Output}')
-    assert(Output==10)
+    assert Output==10, 'Wrong output'
     
 if __name__=='__main__':
     main()

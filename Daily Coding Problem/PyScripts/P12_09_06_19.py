@@ -12,3 +12,30 @@ Created on 25-Jun-2019
 
 @author: Lenovo
 '''
+def ways_to_climb_old(tot_steps,step):
+    '''Recursive Programming'''
+    if tot_steps<0:
+        return 0
+    elif tot_steps==0:
+        return 1
+    elif tot_steps in step:
+        return 1+sum(ways_to_climb_old(tot_steps-x, step) for x in step if x<tot_steps)
+    else:
+        return sum(ways_to_climb_old(tot_steps-x, step) for x in step if x<tot_steps)
+
+
+def ways_to_climb(tot_steps,step):
+    '''Dynamic Programming'''
+    ways=[0 for x in range(tot_steps+1)]
+    ways[0]=1
+    for i in range(tot_steps+1):
+        ways[i]+=sum(ways[i-x] for x in step if i-x>0)
+        ways[i]+=1 if i in step else 0
+    return ways[-1]
+
+def main():
+    assert ways_to_climb(4,{1,2})==5,'Wrong output'
+    assert ways_to_climb(4,{1,2,3})==7,'Wrong output'
+    
+if __name__=='__main__':
+    main()

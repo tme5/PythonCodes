@@ -29,20 +29,6 @@ class Node:
     
     def right(self,data):
         self.right=data
-#     def insert(self,data):
-#         if self.data:
-#             if data<self.data:
-#                 if self.left==None:
-#                     self.left=Node(data)
-#                 else:
-#                     self.left.insert(data)
-#             elif data>self.data:
-#                 if self.right==None:
-#                     self.right=Node(data)
-#                 else:
-#                     self.right.insert(data)
-#         else:
-#             self.data=data
             
     def printTree(self):
         print(self.data)
@@ -79,5 +65,5 @@ if __name__=='__main__':
     root.right.left.left=Node(1)
     root.right.left.right=Node(1)
     # root.printTree()
-    print(count_univals(root))
+    assert count_univals(root)==5, 'Wrong output'
     #5

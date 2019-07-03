@@ -36,9 +36,9 @@ def main():
     """
     main function
     """
-    print(isPartitionsInlist([10,15,3,7], 17))
+    assert isPartitionsInlist([10,15,3,7], 17)==True,'Expected return True'
     #True
-    print(isPartitionsInlist([10,15,3,7], 20))
+    assert isPartitionsInlist([10,15,3,7], 20)==False,'Expected return False'
     #False
     
 if __name__ == '__main__': main()

@@ -24,10 +24,10 @@ def mis_nest(inp):
     return True
 
 if __name__=='__main__':
-    print(mis_nest('([])[]({})'))
+    assert mis_nest('([])[]({})')==True, 'Wrong output'
     #True
-    print(mis_nest('([)]'))
+    assert mis_nest('([)]')==False, 'Wrong output'
     #False
-    print(mis_nest('((()'))
+    assert mis_nest('((()')==False, 'Wrong output'
     #False
     

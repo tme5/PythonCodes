@@ -13,7 +13,7 @@ def autocomplete(inp,lst):
     return [word for word in lst if word.startswith(inp)]
 
 def main():
-    print(autocomplete('de', ['dog','deer','deal']))
+    assert autocomplete('de', ['dog','deer','deal'])==['deer','deal'],'Wrong output' 
     
 if __name__=='__main__':
     main()
